@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace= "com.nhnent.basecamp.mapper.BoardMapper" >
-    <select id ="selectBoardList"  resultType= "String">
+    <select id ="selectBoardList"  resultType= "com.nhnent.basecamp.model.Board">
 			SELECT
-			    *
+			    BOARDID,
+			    BOARDEMAIL,
+			    BOARDCONTENT,
+			    WRITEDATETIME,
+			    EDITDATETIME
 			FROM
 			    BOARD
+		    ORDER BY
+		    	IF(ISNULL(EDITDATETIME), WRITEDATETIME, EDITDATETIME) DESC
     </select>
 
 </mapper>
