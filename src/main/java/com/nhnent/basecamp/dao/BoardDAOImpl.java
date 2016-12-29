@@ -30,4 +30,9 @@ public class BoardDAOImpl implements BoardDAO{
 		return boardMapper.insertBoard(board);
 	}
 
+	@Override
+	public int deleteBoard(Board board) {
+		return boardMapper.deleteBoard(board);
+	}
+
 }

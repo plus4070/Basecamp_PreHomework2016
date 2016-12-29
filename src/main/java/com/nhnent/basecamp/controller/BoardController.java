@@ -57,10 +57,14 @@ public class BoardController {
 		return "";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/board/delete", method = RequestMethod.DELETE)
-	public String deleteBoard(@RequestBody Board  board) {
-		
-		return "";
+	public int deleteBoard(@RequestBody Board  board) {
+		if(boardService.deleteBoard(board) == RESPONSE_FAIL) {
+			return RESPONSE_FAIL;
+		} else {
+			return board.getBoardId();
+		}
 	}
 	
 }

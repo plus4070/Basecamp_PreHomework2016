@@ -15,6 +15,7 @@ public class Board {
 	private String boardContent;
 	private LocalDateTime writeDateTime;
 	private LocalDateTime editDateTime;
+	private int deleted;
 	
 	public void setWriteDateTime(Date writeDateTime) {
 		Instant instant = writeDateTime.toInstant();

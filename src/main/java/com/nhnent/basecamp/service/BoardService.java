@@ -7,4 +7,5 @@ import com.nhnent.basecamp.model.Board;
 public interface BoardService {
 	public List<Board> getBoardList();
 	public int writeBoard(Board board);
+	public int deleteBoard(Board board);
 }

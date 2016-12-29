@@ -12,6 +12,8 @@
 			    LEFT(EDITDATETIME, 10) EDITDATETIME
 			FROM
 			    BOARD
+			WHERE
+				DELETED = 0
 		    ORDER BY
 		    	IF(ISNULL(EDITDATETIME), WRITEDATETIME, EDITDATETIME) DESC
     </select>
@@ -21,13 +23,24 @@
 			    BOARDEMAIL,
 			    BOARDPASSWORD, 
 			    BOARDCONTENT,
-			    WRITEDATETIME)
+			    WRITEDATETIME,
+			    DELETED)
 			VALUES(
 				#{boardEmail}, 
 				#{boardPassword}, 
 				#{boardContent},
-				NOW()
+				NOW(),
+				0
 			)
     </insert>
+    
+    <update id="deleteBoard" parameterType="com.nhnent.basecamp.model.Board" >
+    	UPDATE
+    		BOARD
+   		SET
+   			DELETED = 1
+   		WHERE
+   			BOARDID = #{boardId}
+    </update>
 
 </mapper>
