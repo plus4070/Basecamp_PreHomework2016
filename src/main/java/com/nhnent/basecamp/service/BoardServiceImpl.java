@@ -30,4 +30,13 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 
+	@Override
+	public int deleteBoard(Board board) {
+		if(board.getBoardId() < 0) {
+			return RESPONSE_FAIL;
+		} else {
+			return boardDAO.deleteBoard(board);
+		}
+	}
+
 }
