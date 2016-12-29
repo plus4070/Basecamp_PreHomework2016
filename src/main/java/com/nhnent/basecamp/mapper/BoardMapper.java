@@ -6,4 +6,5 @@ import com.nhnent.basecamp.model.Board;
 
 public interface BoardMapper {
 	public List<Board> selectBoardList();
+	public int insertBoard(Board board);
 }

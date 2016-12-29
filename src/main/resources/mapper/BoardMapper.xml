@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace= "com.nhnent.basecamp.mapper.BoardMapper" >
+<mapper namespace="com.nhnent.basecamp.mapper.BoardMapper">
+
     <select id ="selectBoardList"  resultType= "com.nhnent.basecamp.model.Board">
 			SELECT
 			    BOARDID,
 			    BOARDEMAIL,
 			    BOARDCONTENT,
-			    WRITEDATETIME,
-			    EDITDATETIME
+			    LEFT(WRITEDATETIME, 10) WRITEDATETIME,
+			    LEFT(EDITDATETIME, 10) EDITDATETIME
 			FROM
 			    BOARD
 		    ORDER BY
 		    	IF(ISNULL(EDITDATETIME), WRITEDATETIME, EDITDATETIME) DESC
     </select>
+    
+    <insert id="insertBoard"  parameterType="com.nhnent.basecamp.model.Board">
+    	INSERT INTO BOARD (
+			    BOARDEMAIL,
+			    BOARDPASSWORD, 
+			    BOARDCONTENT,
+			    WRITEDATETIME)
+			VALUES(
+				#{boardEmail}, 
+				#{boardPassword}, 
+				#{boardContent},
+				NOW()
+			)
+    </insert>
 
 </mapper>

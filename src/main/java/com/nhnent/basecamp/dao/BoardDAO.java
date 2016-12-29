@@ -6,4 +6,5 @@ import com.nhnent.basecamp.model.Board;
 
 public interface BoardDAO {
 	public List<Board> getBoardList();
+	public int writeBoard(Board board);
 }
