@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nhnent.basecamp.mapper.BoardMapper;
+import com.nhnent.basecamp.model.Board;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -14,7 +15,7 @@ public class BoardDAOImpl implements BoardDAO{
 	private BoardMapper boardMapper;
 	
 	@Override
-	public List<String> getBoardList() {
+	public List<Board> getBoardList() {
 		return boardMapper.selectBoardList();
 	}
 
