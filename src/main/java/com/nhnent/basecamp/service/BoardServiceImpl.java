@@ -19,4 +19,9 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.getBoardList();
 	}
 
+	@Override
+	public boolean writeBoard(Board board) {
+		return boardDAO.writeBoard(board);
+	}
+
 }

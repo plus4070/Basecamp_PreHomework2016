@@ -6,4 +6,5 @@ import com.nhnent.basecamp.model.Board;
 
 public interface BoardService {
 	public List<Board> getBoardList();
+	public boolean writeBoard(Board board);
 }
