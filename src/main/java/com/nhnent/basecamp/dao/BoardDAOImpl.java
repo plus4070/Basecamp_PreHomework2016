@@ -26,7 +26,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	@Transactional
-	public boolean writeBoard(Board board) {
+	public int writeBoard(Board board) {
 		return boardMapper.insertBoard(board);
 	}
 

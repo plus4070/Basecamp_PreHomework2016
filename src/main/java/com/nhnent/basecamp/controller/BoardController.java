@@ -17,7 +17,7 @@ import com.nhnent.basecamp.service.BoardService;
 
 @Controller
 public class BoardController {
-	
+	static final int RESPONSE_FAIL = -1;
 	static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
@@ -38,10 +38,12 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="/board/write", method = RequestMethod.PUT)
 	public List<Board> writeBoard(@RequestBody Board board, Model model) {
-		boardService.writeBoard(board);
-		List<Board> boardList = boardService.getBoardList();
-		
-		return boardList;
+		if(boardService.writeBoard(board) == RESPONSE_FAIL) {
+			return null;
+		} else {
+			List<Board> boardList = boardService.getBoardList();
+			return boardList;
+		}
 	}
 	
 	@RequestMapping(value="/board/editForm", method = RequestMethod.GET)
