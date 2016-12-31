@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nhnent.basecamp.mapper.BoardMapper;
 import com.nhnent.basecamp.model.Board;
@@ -18,6 +17,11 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	@Autowired
 	private BoardMapper boardMapper;
+
+	@Override
+	public Board getBoardOne(int boardId) {
+		return boardMapper.selectBoardOne(boardId);
+	}
 	
 	@Override
 	public List<Board> getBoardList() {
@@ -25,7 +29,6 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	@Transactional
 	public int writeBoard(Board board) {
 		return boardMapper.insertBoard(board);
 	}
@@ -35,4 +38,8 @@ public class BoardDAOImpl implements BoardDAO{
 		return boardMapper.deleteBoard(board);
 	}
 
+	@Override
+	public int editBoard(Board board) {
+		return boardMapper.updateBoard(board);
+	}
 }

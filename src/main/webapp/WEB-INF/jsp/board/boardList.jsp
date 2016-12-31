@@ -30,8 +30,6 @@
 						<c:set var="rowLen" value="${f:length(boardList)}" />
 						<c:forEach items="${boardList}" var="row" varStatus="status">
 						<tr>
-								<input type="hidden" id="boardId" value="${row.boardId}" />
-								<input type="hidden" id="boardEmail" value="${row.boardEmail}" />
 								<td style="text-align: center;">${rowLen-status.index}</td>
 								<td>${row.boardEmail}</td>
 								<td>${row.boardContent }</td>
@@ -62,6 +60,5 @@
 	<form id="commonForm" name="commonForm"></form>
 </body>
 <script src="<c:url value='/resources/js/jquery/jquery-3.1.1.min.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/common/commonForm.js'/>" charset= "utf-8"></script>
 <script src="<c:url value='/resources/js/board/boardList.js'/>" charset="utf-8"></script>
 </html>

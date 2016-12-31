@@ -55,5 +55,10 @@
 			}
 		});
 	}
+	
+	function editBoard($target) {
+		var targetId = $target.attr('id').substring(4, 6);
+		$(location).attr('href', '/board/editForm/'+targetId);
+	}
 
 })(jQuery);
