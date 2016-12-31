@@ -2,11 +2,14 @@ package com.nhnent.basecamp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +21,7 @@ import com.nhnent.basecamp.service.BoardService;
 @Controller
 public class BoardController {
 	static final int RESPONSE_FAIL = -1;
+	static final int UNAUTHORIZED = 401;
 	static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
@@ -31,7 +35,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/writeForm", method = RequestMethod.GET)
-	public String getWriteForm(Model model) {
+	public String getWriteForm() {
 		return "writeForm";
 	}
 	
@@ -46,15 +50,22 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping(value="/board/editForm", method = RequestMethod.GET)
-	public String getEditForm() {
+	@RequestMapping(value="/board/editForm/{boardId}", method = RequestMethod.GET)
+	public String getEditForm(@PathVariable int boardId, Model model) {
+		Board board = boardService.getBoardOne(boardId);
+		model.addAttribute("board", board);
 		return "editForm";
 	}
 	
-	@RequestMapping(value="/board/edit", method = RequestMethod.PUT)
-	public String editBoard(@RequestBody Board board) {
-		
-		return "";
+	@ResponseBody
+	@RequestMapping(value="/board/edit", method=RequestMethod.PUT)
+	public Board editBoard(@RequestBody Board board, Model model, HttpServletResponse httpServletResponse) {
+		if(boardService.editBoard(board) != null) {
+			return board;
+		} else {
+			httpServletResponse.setStatus(UNAUTHORIZED);
+			return null;
+		}
 	}
 	
 	@ResponseBody
@@ -66,5 +77,4 @@ public class BoardController {
 			return board.getBoardId();
 		}
 	}
-	
 }

@@ -41,6 +41,5 @@
 	</div>
 </body>
 <script src="<c:url value='/resources/js/jquery/jquery-3.1.1.min.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/common/commonForm.js'/>" charset= "utf-8"></script>
 <script src="<c:url value='/resources/js/board/boardWrite.js'/>" charset="utf-8"></script>
 </html>

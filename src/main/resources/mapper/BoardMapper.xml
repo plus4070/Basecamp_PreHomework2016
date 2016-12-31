@@ -3,6 +3,18 @@
 
 <mapper namespace="com.nhnent.basecamp.mapper.BoardMapper">
 
+	<select id = "selectBoardOne" parameterType="Integer" resultType="com.nhnent.basecamp.model.Board">
+		SELECT
+			BOARDID,
+			BOARDEMAIL,
+			BOARDPASSWORD,
+			BOARDCONTENT
+		FROM
+			BOARD
+		WHERE
+			BOARDID = #{boardId}
+	</select>
+
     <select id ="selectBoardList"  resultType= "com.nhnent.basecamp.model.Board">
 			SELECT
 			    BOARDID,
@@ -41,6 +53,16 @@
    			DELETED = 1
    		WHERE
    			BOARDID = #{boardId}
+    </update>
+    
+    <update id="updateBoard" parameterType="com.nhnent.basecamp.model.Board">
+    	UPDATE
+    		BOARD
+   		SET
+   			BOARDCONTENT = #{boardContent},
+   			EDITDATETIME = NOW()
+ 		WHERE
+ 			BOARDID = #{boardId}
     </update>
 
 </mapper>
