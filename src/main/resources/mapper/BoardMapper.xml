@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.nhnent.basecamp.mapper.BoardMapper">
+
+	<select id = "selectBoardOne" parameterType="Integer" resultType="com.nhnent.basecamp.model.Board">
+		SELECT
+			BOARDID,
+			BOARDEMAIL,
+			BOARDPASSWORD,
+			BOARDCONTENT
+		FROM
+			BOARD
+		WHERE
+			BOARDID = #{boardId}
+	</select>
+
+    <select id ="selectBoardList"  resultType= "com.nhnent.basecamp.model.Board">
+			SELECT
+			    BOARDID,
+			    BOARDEMAIL,
+			    BOARDCONTENT,
+			    LEFT(WRITEDATETIME, 10) WRITEDATETIME,
+			    LEFT(EDITDATETIME, 10) EDITDATETIME
+			FROM
+			    BOARD
+			WHERE
+				DELETED = 0
+		    ORDER BY
+		    	IF(ISNULL(EDITDATETIME), WRITEDATETIME, EDITDATETIME) DESC
+    </select>
+    
+    <insert id="insertBoard"  parameterType="com.nhnent.basecamp.model.Board">
+    	INSERT INTO BOARD (
+			    BOARDEMAIL,
+			    BOARDPASSWORD, 
+			    BOARDCONTENT,
+			    WRITEDATETIME,
+			    DELETED)
+			VALUES(
+				#{boardEmail}, 
+				#{boardPassword}, 
+				#{boardContent},
+				NOW(),
+				0
+			)
+    </insert>
+    
+    <update id="deleteBoard" parameterType="com.nhnent.basecamp.model.Board" >
+    	UPDATE
+    		BOARD
+   		SET
+   			DELETED = 1
+   		WHERE
+   			BOARDID = #{boardId}
+    </update>
+    
+    <update id="updateBoard" parameterType="com.nhnent.basecamp.model.Board">
+    	UPDATE
+    		BOARD
+   		SET
+   			BOARDCONTENT = #{boardContent},
+   			EDITDATETIME = NOW()
+ 		WHERE
+ 			BOARDID = #{boardId}
+    </update>
+
+</mapper>
